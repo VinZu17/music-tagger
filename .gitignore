@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+.venv/
+
+# run artifacts: manifests hold third-party lyrics text (lrclib),
+# covers hold label artwork - neither belongs in a repo
+manifest.json
+*-manifest.json
+*-plan.json
+mp3-covers/
+covers/
+*.log

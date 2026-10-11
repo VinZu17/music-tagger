@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "music-tagger"
+dynamic = ["version"]
+description = "Tag music files with metadata from Spotify, Deezer, iTunes, MusicBrainz and lrclib, then rename them."
+readme = "README.md"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "VinZu17" }]
+keywords = ["music", "tagger", "id3", "mp3", "mp4", "flac", "metadata", "spotify", "deezer"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Sound/Audio",
+]
+dependencies = [
+    "mutagen>=1.47",
+    "spotifyscraper>=3.9",
+]
+
+[project.optional-dependencies]
+ja = ["pykakasi>=2.2"]
+ko = ["korean-romanizer>=0.2"]
+all = ["music-tagger[ja,ko]"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+music-tagger = "music_tagger.cli:main"
+
+[tool.hatch.version]
+path = "music_tagger/__init__.py"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
