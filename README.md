@@ -28,8 +28,13 @@ Drop `--dry-run` to actually write.
 
 | | audio | video |
 |---|---|---|
-| read + tag | MP3, FLAC, M4A, OGG, Opus, WAV, APE, WMA | MP4 |
+| extensions | MP3, FLAC, M4A, OGG, Opus, WAV, APE, WMA | MP4 |
+| scanned | always | only with `--videos` |
 | tag writer | mutagen, in place | ffmpeg `-c copy` (streams untouched) |
+
+Video is off by default because most folders hold one kind or the other, and
+silently picking up a stray `.mp4` would be surprising. ffmpeg is only needed
+for video.
 
 ### Sources
 
@@ -93,8 +98,6 @@ pip install "music-tagger[ja]"      # + Japanese romanization
 pip install "music-tagger[ja,ko]"   # + Korean romanization
 ```
 
-ffmpeg is only needed for MP4/MV files.
-
 ## CLI
 
 ```
@@ -107,6 +110,7 @@ music-tagger [source] [-o DEST] [-b BACKUP] [-m MANIFEST]
   --providers LIST             priority order (default spotify,deezer,itunes)
   --accept FLOAT               match confidence threshold (default 0.72)
   --no-lyrics / --no-cover / --no-composer
+  --videos                     also process MP4 files (off by default)
   --group-video                grouping='Official M/V' on video files
   -n, --dry-run                plan only
   -v, --verbose                show per-file reasoning

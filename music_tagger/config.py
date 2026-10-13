@@ -18,7 +18,6 @@ class Config:
 
     name_style: str = "artist-title"
     translit: str = ""                # "", "ja", "ko" - empty = never romanize
-    translit_mode: str = "hybrid"     # hybrid | always | never
 
     genre_lang: str = ""              # "", "ja", "ko", "zh", ...
     default_genre: str = ""
@@ -30,6 +29,7 @@ class Config:
     want_cover: bool = True
     want_composer: bool = True
 
+    include_video: bool = False       # off by default; audio folders are the norm
     dry_run: bool = False
     verbose: bool = False
 

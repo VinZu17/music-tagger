@@ -179,6 +179,15 @@ def resolve(path: Path, cfg: Config) -> Resolved:
 
 # --------------------------------------------------------------------- plan
 
+VIDEO_EXTS = (".mp4",)
+
+
+def scanned_exts(cfg: "Config") -> tuple[str, ...]:
+    """Audio always, video only when asked for - most folders hold one or the
+    other, and silently picking up a stray .mp4 would be surprising."""
+    return tg.AUDIO_EXTS + (VIDEO_EXTS if cfg.include_video else ())
+
+
 def plan(src: Path, cfg: Config) -> tuple[list[Entry], Covers]:
     """Resolve every supported file in `src`. Touches nothing."""
     src = Path(src)
@@ -186,7 +195,7 @@ def plan(src: Path, cfg: Config) -> tuple[list[Entry], Covers]:
     covers: Covers = {}
 
     files = sorted(f for f in src.iterdir()
-                   if f.is_file() and f.suffix.lower() in tg.AUDIO_EXTS)
+                   if f.is_file() and f.suffix.lower() in scanned_exts(cfg))
     for path in files:
         parsed = naming.parse(path.name)
         res = resolve(path, cfg)

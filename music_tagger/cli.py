@@ -44,6 +44,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--no-composer", action="store_true", help="skip composer lookup")
     p.add_argument("--group-video", action="store_true",
                    help="set grouping='Official M/V' on video files")
+    p.add_argument("--videos", action="store_true",
+                   help="also process video files (MP4). Off by default")
     p.add_argument("-n", "--dry-run", action="store_true",
                    help="plan and report, change nothing")
     p.add_argument("-v", "--verbose", action="store_true")
@@ -59,6 +61,7 @@ def cfg_from(args) -> Config:
         accept=args.accept,
         want_lyrics=not args.no_lyrics, want_cover=not args.no_cover,
         want_composer=not args.no_composer,
+        include_video=args.videos,
         group_video=args.group_video, dry_run=args.dry_run, verbose=args.verbose,
     )
 
